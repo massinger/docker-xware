@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu
 
 ADD Xware_x86_32_glibc.tar.gz /opt/xware/
 
