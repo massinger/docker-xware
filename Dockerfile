@@ -1,12 +1,14 @@
-FROM ubuntu
+FROM  resin/armv7hf-debian
 
-ADD Xware_x86_32_glibc.tar.gz /opt/xware/
+RUN [ "cross-build-start" ]
+
+ADD Xware1.0.31_armel_v5te_glibc.tar.gz /opt/xware/
 
 # 更换 Ubuntu 镜像更新地址
-RUN echo "deb  https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted universe multiverse \n
- https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse \n
- https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse \n
- https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted universe multiverse" > /etc/apt/sources.list
+RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted universe multiverse\n\
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse\n\
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse\n\
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted universe multiverse" > /etc/apt/sources.list
 
 RUN apt-get update && \
     apt-get install -y libc6-i386 lib32z1 && \
@@ -18,3 +20,5 @@ VOLUME /opt/download/
 COPY run.sh /opt/xware/
 
 CMD ["bash", "/opt/xware/run.sh"]
+
+RUN [ "cross-build-end" ]
