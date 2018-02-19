@@ -4,11 +4,16 @@ RUN [ "cross-build-start" ]
 
 ADD Xware1.0.31_armel_v5te_glibc.tar.gz /opt/xware/
 
-# 更换 Ubuntu 镜像更新地址
-RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted universe multiverse\n\
-deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse\n\
-deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse\n\
-deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted universe multiverse" > /etc/apt/sources.list
+RUN echo "deb http://mirrors.ustc.edu.cn/ubuntu/ trusty main restricted universe multiverse\n
+ deb http://mirrors.ustc.edu.cn/ubuntu/ trusty-security main restricted universe multiverse\n
+ deb http://mirrors.ustc.edu.cn/ubuntu/ trusty-updates main restricted universe multiverse\n
+ deb http://mirrors.ustc.edu.cn/ubuntu/ trusty-proposed main restricted universe multiverse\n
+ deb http://mirrors.ustc.edu.cn/ubuntu/ trusty-backports main restricted universe multiverse\n
+ deb-src http://mirrors.ustc.edu.cn/ubuntu/ trusty main restricted universe multiverse\n
+ deb-src http://mirrors.ustc.edu.cn/ubuntu/ trusty-security main restricted universe multiverse\n
+ deb-src http://mirrors.ustc.edu.cn/ubuntu/ trusty-updates main restricted universe multiverse\n
+ deb-src http://mirrors.ustc.edu.cn/ubuntu/ trusty-proposed main restricted universe multiverse\n
+ deb-src http://mirrors.ustc.edu.cn/ubuntu/ trusty-backports main restricted universe multiverse" > /etc/apt/sources.list
 
 RUN apt-get update && \
     apt-get install -y libc6-i386 lib32z1 && \
