@@ -4,19 +4,12 @@ RUN [ "cross-build-start" ]
 
 ADD Xware1.0.31_armel_v5te_glibc.tar.gz /opt/xware/
 
-RUN echo "deb http://mirrors.ustc.edu.cn/ubuntu/ trusty main restricted universe multiverse\n
- deb http://mirrors.ustc.edu.cn/ubuntu/ trusty-security main restricted universe multiverse\n
- deb http://mirrors.ustc.edu.cn/ubuntu/ trusty-updates main restricted universe multiverse\n
- deb http://mirrors.ustc.edu.cn/ubuntu/ trusty-proposed main restricted universe multiverse\n
- deb http://mirrors.ustc.edu.cn/ubuntu/ trusty-backports main restricted universe multiverse\n
- deb-src http://mirrors.ustc.edu.cn/ubuntu/ trusty main restricted universe multiverse\n
- deb-src http://mirrors.ustc.edu.cn/ubuntu/ trusty-security main restricted universe multiverse\n
- deb-src http://mirrors.ustc.edu.cn/ubuntu/ trusty-updates main restricted universe multiverse\n
- deb-src http://mirrors.ustc.edu.cn/ubuntu/ trusty-proposed main restricted universe multiverse\n
- deb-src http://mirrors.ustc.edu.cn/ubuntu/ trusty-backports main restricted universe multiverse" > /etc/apt/sources.list
+WORKDIR /lib
+
+RUN  ln -s arm-linux-gnueabihf/ld-2.23.so* ld-linux.so.3 
 
 RUN apt-get update && \
-    apt-get install -y libc6-i386 lib32z1 && \
+    apt-get install -y libc6 && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 WORKDIR /opt/xware/
