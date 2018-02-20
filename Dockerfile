@@ -6,7 +6,7 @@ ADD Xware1.0.31_armel_v5te_glibc.tar.gz /opt/xware/
 
 WORKDIR /lib
 
-RUN  ln -s arm-linux-gnueabihf/ld-2.23.so* ld-linux.so.3 
+RUN  ln -s ld-linux-armhf.so.3 ld-linux.so.3 
 
 RUN apt-get update && \
     apt-get install -y libc6 && \
